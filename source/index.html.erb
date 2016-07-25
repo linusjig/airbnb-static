@@ -108,6 +108,49 @@ title: Le Wagon Middleman boilerplate
 </div>
 </div>
 
+<!-- Your map code -->
+<div id="map">
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+<div style='overflow:hidden;height:500px;width:100%;'>
+  <div id='gmap_canvas' style='height:500px;width:100%;'></div>
+  <div>
+    <small>
+      <a href="http://embedgooglemaps.com">                  embed google maps             </a>
+    </small>
+  </div>
+  <div>
+    <small>
+      <a href="http://werkenbij.rebelinternet.nl/hr-manager/">HR Manager</a>
+    </small>
+  </div>
+
+  <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+</div>
+<script type='text/javascript'>
+  function init_map(){
+   var myOptions = {
+     zoom:13,
+     center:new google.maps.LatLng(51.5073509,-0.12775829999998223),
+     mapTypeId: google.maps.MapTypeId.ROADMAP,
+     scrollwheel: false,
+     styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00 "},{"lightness":-25},{"saturation":-97}]}]
+   };
+
+   map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+   marker = new google.maps.Marker({
+     map: map,
+     position: new google.maps.LatLng(51.5073509,-0.12775829999998223)
+   });
+   infowindow = new google.maps.InfoWindow({
+     content:'<strong>Not Home :)</strong><br>London, United Kingdom<br>'
+   });
+   google.maps.event.addListener(marker, 'click', function(){
+     infowindow.open(map,marker);});
+   infowindow.open(map,marker);}
+   google.maps.event.addDomListener(window, 'load', init_map);
+ </script>
+</div>
+
 
 <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
