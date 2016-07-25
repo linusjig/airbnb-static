@@ -21,13 +21,16 @@
   border-radius: 50%;
 }
 .badge-red {
-  background: #EE5F5B;
+  background: $red;
+  // background: #EE5F5B;
 }
 .badge-green {
-  background: #32B796;
+  background: $green;
+  // background: #32B796;
 }
 .badge-blue {
-  background: #469AE0;
+  background: $blue;
+  // background: #469AE0;
 }
 .badge-black {
   background: black;
