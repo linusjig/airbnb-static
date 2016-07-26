@@ -51,52 +51,75 @@ title: Le Wagon Middleman boilerplate
 
  <!-- Your cards code -->
  <div class="wrapper-grey padded">
-   <h2>Your next trip</h2>
-   <div class="container">
-     <div class="row">
-       <div class="col-sm-4">
-        <div class="card">
-          <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-paris.jpg')">
-            <div class="card-category">Paris</div>
-            <div class="card-description">
-              <h2>Seb's home</h2>
-              <p>charming room with patio</p>
-            </div>
-            <img class="card-user avatar avatar-large" src="images/seb.jpg">
-            <a class="card-link" href="#"></a>
+  <h2>Your next trip</h2>
+  <div class="container">
+    <div class="row">
+      <% data.flats.each do |owner, flat| %>
+      <div class="col-xs-12 col-sm-4">
+      <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path "card-#{owner}.jpeg" %>"'>
+          <div class="card-category"><%= flat.city %></div>
+          <div class="card-description">
+            <h2><%= flat.name %></h2>
+            <p><%= flat.summary %></p>
           </div>
+          <%= image_tag "#{owner}.jpg", class:"card-user avatar avatar-large" %>
+          <%= link_to "#", "flats/#{owner}.html", class: "card-link" %>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-london.jpeg')">
-            <div class="card-category">Paris</div>
-            <div class="card-description">
-              <h2>Anne's home</h2>
-              <p>charming patio without room</p>
-            </div>
-            <img class="card-user avatar avatar-large" src="images/anne.jpg">
-            <a class="card-link" href="#"></a>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div class="wrapper-grey padded">
+ <h2>Your next trip</h2>
+ <div class="container">
+   <div class="row">
+     <div class="col-sm-4">
+      <div class="card">
+        <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-paris.jpg')">
+          <div class="card-category">Paris</div>
+          <div class="card-description">
+            <h2>Seb's home</h2>
+            <p>charming room with patio</p>
           </div>
+          <img class="card-user avatar avatar-large" src="images/seb.jpg">
+          <a class="card-link" href="#"></a>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-brussels.jpeg')">
-            <div class="card-category">Brussels</div>
-            <div class="card-description">
-              <h2>Romain's home</h2>
-              <p>charming room without patio</p>
-            </div>
-            <img class="card-user avatar avatar-large" src="images/romain.jpg">
-            <a class="card-link" href="#"></a>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-london.jpeg')">
+          <div class="card-category">London</div>
+          <div class="card-description">
+            <h2>Romains's home</h2>
+            <p>charming patio without room</p>
           </div>
+          <img class="card-user avatar avatar-large" src="images/romain.jpg">
+          <a class="card-link" href="#"></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/card-brussels.jpeg')">
+          <div class="card-category">Brussels</div>
+          <div class="card-description">
+            <h2>Annes's home</h2>
+            <p>charming room without patio</p>
+          </div>
+          <img class="card-user avatar avatar-large" src="images/anne.jpg">
+          <a class="card-link" href="#"></a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+</div>
+ -->
 <!-- Your newsletter code -->
 <div class="text-center">
  <h3>Get news from us!</h3>
@@ -110,48 +133,48 @@ title: Le Wagon Middleman boilerplate
 
 <!-- Your map code -->
 <div id="map">
-<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-<div style='overflow:hidden;height:500px;width:100%;'>
-  <div id='gmap_canvas' style='height:500px;width:100%;'></div>
-  <div>
-    <small>
-      <a href="http://embedgooglemaps.com">                  embed google maps             </a>
-    </small>
+  <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+  <div style='overflow:hidden;height:500px;width:100%;'>
+    <div id='gmap_canvas' style='height:500px;width:100%;'></div>
+    <div>
+      <small>
+        <a href="http://embedgooglemaps.com">                  embed google maps             </a>
+      </small>
+    </div>
+    <div>
+      <small>
+        <a href="http://werkenbij.rebelinternet.nl/hr-manager/">HR Manager</a>
+      </small>
+    </div>
+
+    <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
   </div>
-  <div>
-    <small>
-      <a href="http://werkenbij.rebelinternet.nl/hr-manager/">HR Manager</a>
-    </small>
-  </div>
+  <script type='text/javascript'>
+    function init_map(){
+     var myOptions = {
+       zoom:13,
+       center:new google.maps.LatLng(51.5073509,-0.12775829999998223),
+       mapTypeId: google.maps.MapTypeId.ROADMAP,
+       scrollwheel: false,
+       styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00 "},{"lightness":-25},{"saturation":-97}]}]
+     };
 
-  <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
-</div>
-<script type='text/javascript'>
-  function init_map(){
-   var myOptions = {
-     zoom:13,
-     center:new google.maps.LatLng(51.5073509,-0.12775829999998223),
-     mapTypeId: google.maps.MapTypeId.ROADMAP,
-     scrollwheel: false,
-     styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00 "},{"lightness":-25},{"saturation":-97}]}]
-   };
-
-   map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-   marker = new google.maps.Marker({
-     map: map,
-     position: new google.maps.LatLng(51.5073509,-0.12775829999998223)
-   });
-   infowindow = new google.maps.InfoWindow({
-     content:'<strong>Not Home :)</strong><br>London, United Kingdom<br>'
-   });
-   google.maps.event.addListener(marker, 'click', function(){
-     infowindow.open(map,marker);});
-   infowindow.open(map,marker);}
-   google.maps.event.addDomListener(window, 'load', init_map);
- </script>
-</div>
+     map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+     marker = new google.maps.Marker({
+       map: map,
+       position: new google.maps.LatLng(51.5073509,-0.12775829999998223)
+     });
+     infowindow = new google.maps.InfoWindow({
+       content:'<strong>Not Home :)</strong><br>London, United Kingdom<br>'
+     });
+     google.maps.event.addListener(marker, 'click', function(){
+       infowindow.open(map,marker);});
+     infowindow.open(map,marker);}
+     google.maps.event.addDomListener(window, 'load', init_map);
+   </script>
+ </div>
 
 
-<!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+ <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
